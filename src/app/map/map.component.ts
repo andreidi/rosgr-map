@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import * as L from 'leaflet';
 import 'leaflet.markercluster';
 
-import { BASE_GMAPS_URL, TILE_LAYER_ATTRIBUTION, TILE_LAYER_MAX_ZOOM, TILE_LAYER_URL } from '../../utils/constants';
+import { BASE_GMAPS_URL, ROMANIA_LATLNG, TILE_LAYER_ATTRIBUTION, TILE_LAYER_MAX_ZOOM, TILE_LAYER_URL } from '../../utils/constants';
 import { ISGRLocation } from '../../types/location';
 
 
@@ -18,9 +18,10 @@ export class MapComponent implements AfterViewInit {
   private _httpClient = inject(HttpClient);
 
   private _map!: L.Map;
+  private _userLocation!: L.LatLngExpression;
 
   private _initMap(): void {
-    const defaultLatLng: L.LatLngExpression = [45.9432, 24.9668];
+    const romaniaLatLng = ROMANIA_LATLNG as L.LatLngExpression;
 
     // Define Romania's bounding box
     const southWest = L.latLng(43.5, 20.2);
@@ -29,7 +30,7 @@ export class MapComponent implements AfterViewInit {
 
     // Initialize the map with restricted bounds
     this._map = L.map('map', {
-      center: defaultLatLng,
+      center: romaniaLatLng,
       zoom: 8,
       zoomControl: false,
       maxBounds: romaniaBounds,
@@ -65,7 +66,6 @@ export class MapComponent implements AfterViewInit {
 
     this._addLocationMarkers();
     this._setMapControls();
-    this._centerMapOnUserLocation();
   }
 
   private _addLocationMarkers(): void {
@@ -152,26 +152,35 @@ export class MapComponent implements AfterViewInit {
   }
 
   private _centerMapOnUserLocation(): void {
+    if (this._userLocation) {
+      this._map.setView(this._userLocation, 14);
+    } else {
+      this._centerMap();
+    }
+  }
+
+  private _centerMap(): void {
+    this._map.setView(ROMANIA_LATLNG as L.LatLngExpression, 8);
+  }
+
+  private _setUserLocation(): void {
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(position => {
-        const userLatLng: L.LatLngExpression = [position.coords.latitude, position.coords.longitude];
+      navigator.geolocation.getCurrentPosition(({ coords }) => {
+        const userLatLng: L.LatLngExpression = [coords.latitude, coords.longitude];
         const icon = L.icon({
           iconUrl: 'map_user.svg',
           iconSize: [20, 20]
         });
 
-        this._map.setView(userLatLng, 13);
+        this._userLocation = userLatLng;
 
         L.marker(userLatLng, { icon }).addTo(this._map).bindPopup('Locația ta');
-      }, () => {
-        console.warn('Geolocation not supported or permission denied');
       });
-    } else {
-      console.warn('Geolocation not supported by this browser.');
     }
   }
 
   ngAfterViewInit(): void {
     this._initMap();
+    this._setUserLocation();
   }
 }
