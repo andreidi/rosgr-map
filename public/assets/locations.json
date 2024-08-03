@@ -1,0 +1,92 @@
+[
+  {
+    "name": "Drinks & More Cash and Carry",
+    "lat": 44.31339358306203,
+    "lng": 23.892796388472515,
+    "address": "Calea București 325c, Craiova 207450",
+    "type": "Automat",
+    "rvmCount": 4,
+    "city": "Craiova",
+    "county": "Dolj"
+  },
+  {
+    "name": "Auchan Craiova - Electroputere",
+    "lat": 44.31239125768333,
+    "lng": 23.830406116649716,
+    "address": "Electroputere Parc, Calea București 80, Craiova",
+    "type": "Automat",
+    "rvmCount": 4,
+    "city": "Craiova",
+    "county": "Dolj"
+  },
+  {
+    "name": "Lidl Calea București",
+    "lat": 44.3153376069877,
+    "lng": 23.826999164330186,
+    "address": "Calea București 115, Craiova 200528",
+    "type": "Automat",
+    "rvmCount": 2,
+    "city": "Craiova",
+    "county": "Dolj"
+  },
+  {
+    "name": "Lidl Valea Roșie",
+    "lat": 44.3012005141956,
+    "lng": 23.81966077791904,
+    "address": "Strada Caracal 150A, Craiova 200745",
+    "type": "Automat",
+    "rvmCount": 2,
+    "city": "Craiova",
+    "county": "Dolj"
+  },
+  {
+    "name": "Lidl George Enescu",
+    "lat": 44.33207504184557,
+    "lng": 23.78336277329749,
+    "address": "Strada George Enescu 72B, Craiova 200254",
+    "type": "Automat",
+    "rvmCount": 2,
+    "city": "Craiova",
+    "county": "Dolj"
+  },
+  {
+    "name": "Kaufland Calea București",
+    "lat": 44.312083415433094,
+    "lng": 23.82745863102956,
+    "address": "Calea București 72, Craiova 200446",
+    "type": "Automat",
+    "rvmCount": 3,
+    "city": "Craiova",
+    "county": "Dolj"
+  },
+  {
+    "name": "Kaufland Craiova Valea Rosie Caracal",
+    "lat": 44.30121272370692,
+    "lng": 23.820525154362695,
+    "address": "Strada Caracal 150D, Craiova 021173",
+    "type": "Automat",
+    "rvmCount": 2,
+    "city": "Craiova",
+    "county": "Dolj"
+  },
+  {
+    "name": "PENNY Amaradia",
+    "lat": 44.326921685414625,
+    "lng": 23.79328942923743,
+    "address": "Strada Amaradia 28, Craiova 200157",
+    "type": "Automat",
+    "rvmCount": 2,
+    "city": "Craiova",
+    "county": "Dolj"
+  },
+  {
+    "name": "Market Genial",
+    "lat": 44.24915079396069,
+    "lng": 23.932693024128252,
+    "address": "Strada Revoluției, Coșoveni",
+    "type": "Automat",
+    "rvmCount": 1,
+    "city": "Coșoveni",
+    "county": "Dolj"
+  }
+]
