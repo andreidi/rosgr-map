@@ -64,7 +64,7 @@ export class MapComponent implements AfterViewInit {
 
 
     this._addLocationMarkers();
-    this._addMapControls();
+    this._setMapControls();
     this._centerMapOnUserLocation();
   }
 
@@ -74,7 +74,7 @@ export class MapComponent implements AfterViewInit {
       iconSize: [40, 80]
     });
 
-    const markers = L.markerClusterGroup();
+    const markers = window.L.markerClusterGroup();
 
     this._httpClient.get('assets/locations.json', { responseType: 'json' })
       .subscribe((locations: any) => {
@@ -93,7 +93,7 @@ export class MapComponent implements AfterViewInit {
     this._map.addLayer(markers);
   }
 
-  private _addMapControls(): void {
+  private _setMapControls(): void {
     const position = 'bottomright';
 
     // Reposition Zoom controls
