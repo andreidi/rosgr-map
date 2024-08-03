@@ -13,3 +13,25 @@
 #map {
   height: 100%;
 }
+
+.new-location-btn {
+  position: fixed;
+  bottom: 2rem;
+  left: 2rem;
+  z-index: 999;
+  color: white !important;
+  padding: 11px 27px;
+  font-size: 16px;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 100px;
+  border: 1px solid #000 !important;
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  background: #39ae70 !important;
+
+  &:hover {
+    border: 1px solid #000 !important;
+    background: #2e8b5a !important;
+    color: white !important;
+  }
+}

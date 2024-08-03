@@ -5,3 +5,5 @@ export const TILE_LAYER_MAX_ZOOM = 16;
 export const ROMANIA_LATLNG = [45.9432, 24.9668];
 
 export const BASE_GMAPS_URL = 'https://www.google.com/maps/search/?api=1&query=';
+
+export const NEW_LOCATION_FORM_URL = 'https://forms.gle/GFSGPTKv5YgreLTt8';

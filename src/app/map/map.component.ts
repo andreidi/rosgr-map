@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import * as L from 'leaflet';
 import 'leaflet.markercluster';
 
-import { BASE_GMAPS_URL, ROMANIA_LATLNG, TILE_LAYER_ATTRIBUTION, TILE_LAYER_MAX_ZOOM, TILE_LAYER_URL } from '../../utils/constants';
+import { BASE_GMAPS_URL, NEW_LOCATION_FORM_URL, ROMANIA_LATLNG, TILE_LAYER_ATTRIBUTION, TILE_LAYER_MAX_ZOOM, TILE_LAYER_URL } from '../../utils/constants';
 import { ISGRLocation } from '../../types/location';
 
 
@@ -19,6 +19,8 @@ export class MapComponent implements AfterViewInit {
 
   private _map!: L.Map;
   private _userLocation!: L.LatLngExpression;
+
+  newLocationFormURL = NEW_LOCATION_FORM_URL;
 
   private _initMap(): void {
     const romaniaLatLng = ROMANIA_LATLNG as L.LatLngExpression;
