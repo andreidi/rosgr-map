@@ -1,1 +1,7 @@
-<app-map></app-map>
+@defer {
+<app-map />
+}@loading (minimum 750ms) {
+<app-loading />
+}@error {
+<p>Failed to load the map</p>
+}
