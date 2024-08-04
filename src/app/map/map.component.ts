@@ -19,6 +19,7 @@ export class MapComponent implements AfterViewInit {
 
   private _map!: L.Map;
   private _userLocation!: L.LatLngExpression;
+  private _romaniaBounds!: L.LatLngBounds;
 
   newLocationFormURL = NEW_LOCATION_FORM_URL;
 
@@ -29,6 +30,8 @@ export class MapComponent implements AfterViewInit {
     const southWest = L.latLng(43.5, 20.2);
     const northEast = L.latLng(48.3, 30.0);
     const romaniaBounds = L.latLngBounds(southWest, northEast);
+
+    this._romaniaBounds = romaniaBounds;
 
     // Initialize the map with restricted bounds
     this._map = L.map('map', {
@@ -51,17 +54,22 @@ export class MapComponent implements AfterViewInit {
     this._httpClient.get('assets/romania.geojson', { responseType: 'json' })
       .subscribe((romaniaData: any) => {
         if (romaniaData) {
-          const romaniaLayer = L.geoJSON(romaniaData, {
+          L.geoJSON(romaniaData, {
             style: {
               color: '#2e7d32',
               weight: 2,
               opacity: 0.8,
               fillOpacity: 0
-            }
+            },
+            onEachFeature: (_feature, layer) => {
+              layer.on('click', ({ target }) => {
+                this._map.fitBounds(target.getBounds());
+              });
+            },
           }).addTo(this._map);
 
           // Fit the map to the bounds of Romania
-          this._map.fitBounds(romaniaLayer.getBounds());
+          this._map.fitBounds(romaniaBounds);
         }
       });
 
@@ -162,7 +170,7 @@ export class MapComponent implements AfterViewInit {
   }
 
   private _centerMap(): void {
-    this._map.setView(ROMANIA_LATLNG as L.LatLngExpression, 8);
+    this._map.fitBounds(this._romaniaBounds);
   }
 
   private _setUserLocation(): void {
