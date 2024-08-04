@@ -1,9 +1,17 @@
-<div class="map-container">
-  <div class="map-frame">
+<div class="map">
+  <div class="map__container">
     <div id="map"></div>
   </div>
 </div>
 
-<a class="new-location-btn" [href]="newLocationFormURL" target="_blank">
-  Propune o locație
-</a>
+<div class="new-location__container">
+  <span class="new_location__inner">
+    <a class="new-location__btn" [href]="newLocationFormURL" target="_blank">
+      Propune o locație
+    </a>
+    <span class="new-location__badge">
+      <span class="new-location__badge-animation"></span>
+      <span class="new-location__badge-color"></span>
+    </span>
+  </span>
+</div>
