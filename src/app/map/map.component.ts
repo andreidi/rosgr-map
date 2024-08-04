@@ -1,8 +1,9 @@
-import { AfterViewInit, Component, inject } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { AfterViewInit, Component, inject, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
 import * as L from 'leaflet';
 import 'leaflet.markercluster';
 
+import { MapService } from '../../services/map/map.service';
 import { BASE_GMAPS_URL, NEW_LOCATION_FORM_URL, ROMANIA_LATLNG, TILE_LAYER_ATTRIBUTION, TILE_LAYER_MAX_ZOOM, TILE_LAYER_URL } from '../../utils/constants';
 import { ISGRLocation } from '../../types/location';
 
@@ -14,14 +15,26 @@ import { ISGRLocation } from '../../types/location';
   templateUrl: './map.component.html',
   styleUrl: './map.component.scss'
 })
-export class MapComponent implements AfterViewInit {
-  private _httpClient = inject(HttpClient);
+export class MapComponent implements AfterViewInit, OnDestroy {
+  newLocationFormURL = NEW_LOCATION_FORM_URL;
+
+  private _mapService = inject(MapService);
 
   private _map!: L.Map;
   private _userLocation!: L.LatLngExpression;
   private _romaniaBounds!: L.LatLngBounds;
 
-  newLocationFormURL = NEW_LOCATION_FORM_URL;
+  private _subscriptions$: Subscription[] = [];
+
+  ngAfterViewInit(): void {
+    this._initMap();
+    this._setUserLocation();
+  }
+
+  ngOnDestroy(): void {
+    this._subscriptions$.forEach(subscription$ => subscription$.unsubscribe());
+    this._map.remove();
+  }
 
   private _initMap(): void {
     const romaniaLatLng = ROMANIA_LATLNG as L.LatLngExpression;
@@ -51,7 +64,7 @@ export class MapComponent implements AfterViewInit {
     // Set minimum zoom level
     this._map.setMinZoom(this._map.getBoundsZoom(romaniaBounds));
 
-    this._httpClient.get('assets/romania.geojson', { responseType: 'json' })
+    const subscription = this._mapService.getCountryGeoJSONData()
       .subscribe((romaniaData: any) => {
         if (romaniaData) {
           L.geoJSON(romaniaData, {
@@ -72,7 +85,7 @@ export class MapComponent implements AfterViewInit {
           this._map.fitBounds(romaniaBounds);
         }
       });
-
+    this._subscriptions$.push(subscription);
 
     this._addLocationMarkers();
     this._setMapControls();
@@ -86,8 +99,8 @@ export class MapComponent implements AfterViewInit {
 
     const markers = window.L.markerClusterGroup();
 
-    this._httpClient.get('assets/locations.json', { responseType: 'json' })
-      .subscribe((locations: any) => {
+    const subscription = this._mapService.getSGRLocationsData()
+      .subscribe((locations: ISGRLocation[]) => {
         if (locations) {
           locations.forEach((location: ISGRLocation) => {
             const marker = L.marker([location.lat, location.lng], { icon });
@@ -99,6 +112,7 @@ export class MapComponent implements AfterViewInit {
           });
         }
       });
+    this._subscriptions$.push(subscription);
 
     this._map.addLayer(markers);
   }
@@ -187,10 +201,5 @@ export class MapComponent implements AfterViewInit {
         L.marker(userLatLng, { icon }).addTo(this._map).bindPopup('Locația ta');
       });
     }
-  }
-
-  ngAfterViewInit(): void {
-    this._initMap();
-    this._setUserLocation();
   }
 }
