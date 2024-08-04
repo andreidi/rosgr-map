@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, inject, OnDestroy } from '@angular/core';
+import { AfterViewInit, Component, inject, NgZone, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import * as L from 'leaflet';
 import 'leaflet.markercluster';
@@ -19,6 +19,7 @@ export class MapComponent implements AfterViewInit, OnDestroy {
   newLocationFormURL = NEW_LOCATION_FORM_URL;
 
   private _mapService = inject(MapService);
+  private _ngZone = inject(NgZone);
 
   private _map!: L.Map;
   private _userLocation!: L.LatLngExpression;
@@ -27,7 +28,9 @@ export class MapComponent implements AfterViewInit, OnDestroy {
   private _subscriptions$: Subscription[] = [];
 
   ngAfterViewInit(): void {
-    this._initMap();
+    this._ngZone.runOutsideAngular(() => {
+      this._initMap();
+    });
     this._setUserLocation();
   }
 
