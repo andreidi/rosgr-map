@@ -5,19 +5,41 @@
     "lng": 23.892796388472515,
     "address": "Calea București 325c, Craiova 207450",
     "type": "Automat",
-    "rvmCount": 4,
+    "rvmCount": 2,
     "city": "Craiova",
     "county": "Dolj"
   },
   {
-    "name": "Auchan Craiova - Electroputere",
+    "name": "Auchan Electroputere",
     "lat": 44.31239125768333,
     "lng": 23.830406116649716,
     "address": "Electroputere Parc, Calea București 80, Craiova",
     "type": "Automat",
     "rvmCount": 4,
     "city": "Craiova",
-    "county": "Dolj"
+    "county": "Dolj",
+    "schedules": [
+      {
+        "day": "Luni - Duminica",
+        "hoursInterval": "07 - 22"
+      }
+    ]
+  },
+  {
+    "name": "Auchan Craiovița",
+    "lat": 44.32810904477088,
+    "lng": 23.775182853740894,
+    "address": "Calea Severinului 5A, Craiova 200233",
+    "type": "Automat",
+    "rvmCount": 4,
+    "city": "Craiova",
+    "county": "Dolj",
+    "schedules": [
+      {
+        "day": "Luni - Duminica",
+        "hoursInterval": "07 - 22"
+      }
+    ]
   },
   {
     "name": "Lidl Calea București",
@@ -27,7 +49,37 @@
     "type": "Automat",
     "rvmCount": 2,
     "city": "Craiova",
-    "county": "Dolj"
+    "county": "Dolj",
+    "schedules": [
+      {
+        "day": "Luni - Sambata",
+        "hoursInterval": "06 - 22"
+      },
+      {
+        "day": "Duminica",
+        "hoursInterval": "07 - 20"
+      }
+    ]
+  },
+  {
+    "name": "Lidl Gara",
+    "lat": 44.32586979824868,
+    "lng": 23.813329576462856,
+    "address": "Strada Maramureș 4, Craiova 200026",
+    "type": "Automat",
+    "rvmCount": 2,
+    "city": "Craiova",
+    "county": "Dolj",
+    "schedules": [
+      {
+        "day": "Luni - Sambata",
+        "hoursInterval": "06 - 22"
+      },
+      {
+        "day": "Duminica",
+        "hoursInterval": "07 - 20"
+      }
+    ]
   },
   {
     "name": "Lidl Valea Roșie",
@@ -37,7 +89,17 @@
     "type": "Automat",
     "rvmCount": 2,
     "city": "Craiova",
-    "county": "Dolj"
+    "county": "Dolj",
+    "schedules": [
+      {
+        "day": "Luni - Sambata",
+        "hoursInterval": "06 - 22"
+      },
+      {
+        "day": "Duminica",
+        "hoursInterval": "07 - 20"
+      }
+    ]
   },
   {
     "name": "Lidl George Enescu",
@@ -47,7 +109,57 @@
     "type": "Automat",
     "rvmCount": 2,
     "city": "Craiova",
-    "county": "Dolj"
+    "county": "Dolj",
+    "schedules": [
+      {
+        "day": "Luni - Sambata",
+        "hoursInterval": "06 - 22"
+      },
+      {
+        "day": "Duminica",
+        "hoursInterval": "07 - 20"
+      }
+    ]
+  },
+  {
+    "name": "Lidl Brestei",
+    "lat": 44.32451650678151,
+    "lng": 23.77237340013464,
+    "address": "Strada Brestei 185, Craiova 200207",
+    "type": "Automat",
+    "rvmCount": 2,
+    "city": "Craiova",
+    "county": "Dolj",
+    "schedules": [
+      {
+        "day": "Luni - Sambata",
+        "hoursInterval": "06 - 22"
+      },
+      {
+        "day": "Duminica",
+        "hoursInterval": "07 - 20"
+      }
+    ]
+  },
+  {
+    "name": "Lidl Romanescu",
+    "lat": 44.29583381853814,
+    "lng": 23.80103599195276,
+    "address": "Bulevardul Nicolae Romanescu 39, Craiova 200738",
+    "type": "Automat",
+    "rvmCount": 2,
+    "city": "Craiova",
+    "county": "Dolj",
+    "schedules": [
+      {
+        "day": "Luni - Sambata",
+        "hoursInterval": "06 - 22"
+      },
+      {
+        "day": "Duminica",
+        "hoursInterval": "07 - 20"
+      }
+    ]
   },
   {
     "name": "Kaufland Calea București",
@@ -55,25 +167,115 @@
     "lng": 23.82745863102956,
     "address": "Calea București 72, Craiova 200446",
     "type": "Automat",
-    "rvmCount": 3,
+    "rvmCount": 4,
     "city": "Craiova",
-    "county": "Dolj"
+    "county": "Dolj",
+    "schedules": [
+      {
+        "day": "Luni - Duminica",
+        "hoursInterval": "05 - 23"
+      }
+    ]
   },
   {
-    "name": "Kaufland Craiova Valea Rosie Caracal",
+    "name": "Kaufland 1 Mai",
+    "lat": 44.30053966631113,
+    "lng": 23.79623908359737,
+    "address": "Strada Doctor Nicolae Ionescu Sisești 23, Craiova 200303",
+    "type": "Automat",
+    "rvmCount": 4,
+    "city": "Craiova",
+    "county": "Dolj",
+    "schedules": [
+      {
+        "day": "Luni - Duminica",
+        "hoursInterval": "05 - 23"
+      }
+    ]
+  },
+  {
+    "name": "Kaufland Craiovița",
+    "lat": 44.33617851720348,
+    "lng": 23.77514184138993,
+    "address": "Bulevardul Tineretului 18C, Craiova 200260",
+    "type": "Automat",
+    "rvmCount": 4,
+    "city": "Craiova",
+    "county": "Dolj",
+    "schedules": [
+      {
+        "day": "Luni - Duminica",
+        "hoursInterval": "05 - 23"
+      }
+    ]
+  },
+  {
+    "name": "Kaufland Valea Roșie",
     "lat": 44.30121272370692,
     "lng": 23.820525154362695,
     "address": "Strada Caracal 150D, Craiova 021173",
     "type": "Automat",
     "rvmCount": 2,
     "city": "Craiova",
-    "county": "Dolj"
+    "county": "Dolj",
+    "schedules": [
+      {
+        "day": "Luni - Duminica",
+        "hoursInterval": "05 - 23"
+      }
+    ]
   },
   {
     "name": "PENNY Amaradia",
     "lat": 44.326921685414625,
     "lng": 23.79328942923743,
     "address": "Strada Amaradia 28, Craiova 200157",
+    "type": "Automat",
+    "rvmCount": 1,
+    "city": "Craiova",
+    "county": "Dolj"
+  },
+  {
+    "name": "PENNY Craiovița",
+    "lat": 44.33519748093484,
+    "lng": 23.773073580778217,
+    "address": "Bulevardul Tineretului 18A, Craiova",
+    "type": "Automat",
+    "rvmCount": 1,
+    "city": "Craiova",
+    "county": "Dolj"
+  },
+  {
+    "name": "Carrefour Promenada",
+    "lat": 44.3287565723165,
+    "lng": 23.772482104523707,
+    "address": "Calea Severinului 61, Craiova 200769",
+    "type": "Automat",
+    "rvmCount": 2,
+    "city": "Craiova",
+    "county": "Dolj",
+    "schedules": [
+      {
+        "day": "Luni - Duminica",
+        "hoursInterval": "07 - 22"
+      }
+    ]
+  },
+  {
+    "name": "METRO",
+    "lat": 44.311947368639196,
+    "lng": 23.887187326926135,
+    "address": "Calea București, Km 7.5, com. Cârcea, Craiova 061128",
+    "type": "Automat",
+    "rvmCount": 3,
+    "city": "Cârcea",
+    "county": "Dolj"
+  },
+  {
+    "name": "Supeco",
+    "lat": 44.32718085483583,
+    "lng": 23.777115808667787,
+    "address": "1-3, Calea Severinului, Craiova 200136",
     "type": "Automat",
     "rvmCount": 2,
     "city": "Craiova",
