@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, inject, NgZone, OnDestroy } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, inject, NgZone, OnDestroy, output } from '@angular/core';
 import { Subscription } from 'rxjs';
 import * as L from 'leaflet';
 import 'leaflet.markercluster';
@@ -17,6 +17,9 @@ import { ISGRLocation } from '../../types/location';
   styleUrl: './map.component.scss'
 })
 export class MapComponent implements AfterViewInit, OnDestroy {
+  locationSelected = output<ISGRLocation>();
+  closeSideNav = output<void>();
+
   private _mapService = inject(MapService);
   private _ngZone = inject(NgZone);
 
@@ -77,8 +80,8 @@ export class MapComponent implements AfterViewInit, OnDestroy {
               fillOpacity: 0
             },
             onEachFeature: (_feature, layer) => {
-              layer.on('click', ({ target }) => {
-                this._map.fitBounds(target.getBounds());
+              layer.on('click', () => {
+                this.closeSideNav.emit();
               });
             },
           }).addTo(this._map);
@@ -95,20 +98,30 @@ export class MapComponent implements AfterViewInit, OnDestroy {
 
   private _addLocationMarkers(): void {
     const icon = L.icon({
-      iconUrl: 'map_marker.svg',
-      iconSize: [40, 80]
+      iconSize: [40, 80],
+      iconUrl: 'map_marker.svg'
     });
 
-    const markers = window.L.markerClusterGroup();
+    const markers = window.L.markerClusterGroup({
+      chunkedLoading: true,
+      disableClusteringAtZoom: TILE_LAYER_MAX_ZOOM
+    });
 
     const subscription = this._mapService.getSGRLocationsData()
       .subscribe((locations: ISGRLocation[]) => {
         if (locations) {
           locations.forEach((location: ISGRLocation) => {
             const marker = L.marker([location.lat, location.lng], { icon });
-            const popupContent = this._createPopupContent(location);
 
-            marker.bindPopup(popupContent);
+            marker.bindPopup(location.name);
+
+            marker.on('popupopen', ({ target }) => {
+              this.locationSelected.emit(location);
+              this._map.panTo(target.getLatLng());
+            });
+            marker.on('popupclose', () => {
+              this.closeSideNav.emit();
+            });
 
             markers.addLayer(marker);
           });
@@ -116,7 +129,7 @@ export class MapComponent implements AfterViewInit, OnDestroy {
       });
     this._subscriptions$.push(subscription);
 
-    this._map.addLayer(markers);
+    markers.addTo(this._map);
   }
 
   private _setMapControls(): void {
@@ -159,22 +172,6 @@ export class MapComponent implements AfterViewInit, OnDestroy {
 
     // Add Locate control to map
     this._map.addControl(new locateControl());
-  }
-
-  private _createPopupContent({ name, lat, lng, address, rvmCount = 1 }: Partial<ISGRLocation>): string {
-    const googleMapsUrl = `${BASE_GMAPS_URL}${lat},${lng}`;
-
-    return `
-     <div>
-      <h2>${name}</h2>
-      <p>${address}</p>
-
-      <h3>Automate disponibile: <strong>${rvmCount}</strong></h3>
-      <p>
-        <a href="${googleMapsUrl}" target="_blank">Navighează la adresă</a>
-      </p>
-    </div>
-    `;
   }
 
   private _centerMapOnUserLocation(): void {

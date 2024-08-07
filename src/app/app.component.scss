@@ -1,0 +1,15 @@
+.app {
+  height: 100%;
+
+  &__sidenav {
+    background-color: #fefefe;
+    color: #202124;
+    width: 408px;
+
+    &-options {
+      display: flex;
+      justify-content: flex-end;
+      padding: 20px;
+    }
+  }
+}
