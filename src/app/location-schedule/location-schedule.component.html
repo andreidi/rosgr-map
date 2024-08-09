@@ -1,0 +1,18 @@
+<div class="location-schedule">
+  <div class="location-schedule__list">
+    @if((schedules$ | async); as schedules) {
+    @for (schedule of schedules; track schedule.day) {
+    <li class="location-schedule__list-item">
+      <p>{{ schedule.day }}</p>
+      <p>{{ schedule.hoursInterval }}</p>
+    </li>
+    } @empty {
+    <ng-container [ngTemplateOutlet]="schedulesUnavailable" />
+    }
+    }
+  </div>
+</div>
+
+<ng-template #schedulesUnavailable>
+  <p class="location-schedule__unavailable">Indisponibil pentru această locație.</p>
+</ng-template>

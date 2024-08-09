@@ -18,6 +18,11 @@
 
 <section class="location-info__container location-info__details">
   <div class="location-info__details-row">
+    <mat-icon>location_on</mat-icon>
+    <p>{{locationInfo.address}}</p>
+  </div>
+
+  <div class="location-info__details-row">
     <mat-icon>numbers</mat-icon>
     <p>Automate disponibile: <strong>{{locationInfo.rvmCount}}</strong></p>
   </div>
@@ -27,21 +32,8 @@
       <mat-icon>schedule</mat-icon>
       <p>Program de funcționare:</p>
     </div>
-    <div class="location-info__schedule">
-      @for (schedule of locationInfo.schedules; track schedule.day) {
-      <li class="location-info__schedule-row">
-        <p>{{ schedule.day }}</p>
-        <p>{{ schedule.hoursInterval }}</p>
-      </li>
-      } @empty {
-      <li class="location-info__schedule-unavailable">Indisponibil pentru această locație.</li>
-      }
-    </div>
-  </div>
 
-  <div class="location-info__details-row">
-    <mat-icon>location_on</mat-icon>
-    <p>{{locationInfo.address}}</p>
+    <app-location-schedule [locationId]="locationInfo.id" />
   </div>
 
   <div class="location-info__cta">

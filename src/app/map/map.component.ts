@@ -104,7 +104,7 @@ export class MapComponent implements AfterViewInit, OnDestroy {
 
     const markers = window.L.markerClusterGroup({
       chunkedLoading: true,
-      disableClusteringAtZoom: TILE_LAYER_MAX_ZOOM
+      disableClusteringAtZoom: TILE_LAYER_MAX_ZOOM - 1
     });
 
     const subscription = this._mapService.getSGRLocationsData()

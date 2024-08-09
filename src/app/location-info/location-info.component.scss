@@ -34,19 +34,6 @@
     }
   }
 
-  &__schedule {
-    &-row {
-      display: flex;
-      justify-content: space-between;
-    }
-
-    &-unavailable {
-      color: #f57c00;
-      display: inline-block;
-      margin-bottom: 20px;
-    }
-  }
-
   &__cta {
     margin-top: 20px;
     text-align: center;

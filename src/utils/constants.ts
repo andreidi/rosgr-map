@@ -12,7 +12,6 @@ export const FEEDBACK_FORM_URL = 'https://forms.gle/qXZ8g5rKovr6tLZM8';
 
 export const ASSETS_CONFIG = () => {
   return {
-    locations: 'assets/locations.json',
     locationsCacheKey: 'locations-cache',
     locationsCacheTTL: 24 * 60 * 60 * 1000, // 24 hours
     geoJSON: 'assets/romania.geojson',
@@ -20,3 +19,10 @@ export const ASSETS_CONFIG = () => {
     geoJSONCacheTTL: 72 * 60 * 60 * 1000 // 72 hours
   }
 };
+
+export const SUPABASE_TABLES = () => {
+  return {
+    locations: 'locations',
+    locationSchedules: 'location_schedules'
+  }
+}

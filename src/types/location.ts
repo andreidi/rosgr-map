@@ -1,4 +1,5 @@
 export interface ISGRLocation {
+  id: string;
   name: string;
   lat: number;
   lng: number;
@@ -7,7 +8,6 @@ export interface ISGRLocation {
   county: string;
   rvmCount: number;
   type: ESGRLocationType;
-  schedules: ISGRLocationSchedule[];
 }
 
 export interface ISGRLocationSchedule {
