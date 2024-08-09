@@ -104,7 +104,8 @@ export class MapComponent implements AfterViewInit, OnDestroy {
 
     const markers = window.L.markerClusterGroup({
       chunkedLoading: true,
-      disableClusteringAtZoom: TILE_LAYER_MAX_ZOOM - 1
+      disableClusteringAtZoom: TILE_LAYER_MAX_ZOOM - 1,
+      animate: false
     });
 
     const subscription = this._mapService.getSGRLocationsData()
@@ -117,7 +118,6 @@ export class MapComponent implements AfterViewInit, OnDestroy {
 
             marker.on('popupopen', ({ target }) => {
               this.locationSelected.emit(location);
-              this._map.panTo(target.getLatLng());
             });
             marker.on('popupclose', () => {
               this.closeSideNav.emit();
@@ -176,14 +176,14 @@ export class MapComponent implements AfterViewInit, OnDestroy {
 
   private _centerMapOnUserLocation(): void {
     if (this._userLocation) {
-      this._map.setView(this._userLocation, 14);
+      this._map.setView(this._userLocation, 14, { animate: false });
     } else {
       this._centerMap();
     }
   }
 
   private _centerMap(): void {
-    this._map.fitBounds(this._romaniaBounds);
+    this._map.fitBounds(this._romaniaBounds, { animate: false });
   }
 
   private _setUserLocation(): void {
