@@ -4,12 +4,16 @@
       display: flex;
       justify-content: space-between;
     }
-
   }
 
   &__unavailable {
     color: #f57c00;
     display: inline-block;
+    margin-bottom: 20px;
+  }
+
+  &__loading {
+    margin-top: 40px;
     margin-bottom: 20px;
   }
 }

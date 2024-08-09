@@ -1,11 +1,15 @@
 <div class="location-schedule">
   <div class="location-schedule__list">
-    @if((schedules$ | async); as schedules) {
+    @if(isLoading) {
+    <div class="location-schedule__loading">
+      <mat-progress-bar mode="query" />
+    </div>
+    }@else {
     @for (schedule of schedules; track schedule.day) {
-    <li class="location-schedule__list-item">
+    <div class="location-schedule__list-item">
       <p>{{ schedule.day }}</p>
       <p>{{ schedule.hoursInterval }}</p>
-    </li>
+    </div>
     } @empty {
     <ng-container [ngTemplateOutlet]="schedulesUnavailable" />
     }
