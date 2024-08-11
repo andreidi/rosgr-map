@@ -23,6 +23,7 @@ export const ASSETS_CONFIG = () => {
 export const SUPABASE_TABLES = () => {
   return {
     locations: 'locations',
-    locationSchedules: 'location_schedules'
+    locationSchedules: 'location_schedules',
+    locationReviews: 'location_reviews'
   }
 }

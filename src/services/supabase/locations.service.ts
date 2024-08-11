@@ -6,9 +6,9 @@ import {
 
 import { environment } from '../../environments/environment';
 import { SUPABASE_TABLES } from '../../utils/constants';
-import { ISGRLocation, ISGRLocationSchedule } from '../../types/location';
+import { ISGRLocation, ISGRLocationReview, ISGRLocationSchedule } from '../../types/location';
 
-const { locations, locationSchedules } = SUPABASE_TABLES();
+const { locations, locationSchedules, locationReviews } = SUPABASE_TABLES();
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +17,10 @@ export class SGRLocationService {
   private _supabase: SupabaseClient;
 
   constructor() {
-    this._supabase = createClient(environment.supabase.url, environment.supabase.key)
+    const supabaseUrl = environment.production ? process.env['SUPABASE_URL'] : environment.supabase.url;
+    const supabaseKey = environment.production ? process.env['SUPABASE_KEY'] : environment.supabase.key;
+
+    this._supabase = createClient(supabaseUrl as string, supabaseKey as string);
   }
 
   async getAllLocations(): Promise<ISGRLocation[]> {
@@ -40,5 +43,16 @@ export class SGRLocationService {
     }
 
     return data as ISGRLocationSchedule[];
+  }
+
+  async getLocationReviews(locationId: string): Promise<ISGRLocationReview[]> {
+    const { data, error } = await this._supabase.from(locationReviews).select('*').filter('locationId', 'eq', locationId);
+
+    if (error) {
+      console.error('Failed to retrieve location reviews', error);
+      return [];
+    }
+
+    return data as ISGRLocationReview[];
   }
 }

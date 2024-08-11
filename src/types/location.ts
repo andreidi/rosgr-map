@@ -15,6 +15,14 @@ export interface ISGRLocationSchedule {
   hoursInterval: string;
 }
 
+export interface ISGRLocationReview {
+  id: number;
+  locationId: string;
+  stars: number;
+  details: string;
+  created_at: number;
+}
+
 export enum ESGRLocationType {
   AUTOMATIC = 'Automat',
   MANUAL = 'Manual'
