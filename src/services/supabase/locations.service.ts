@@ -17,10 +17,7 @@ export class SGRLocationService {
   private _supabase: SupabaseClient;
 
   constructor() {
-    const supabaseUrl = environment.production ? process.env['SUPABASE_URL'] : environment.supabase.url;
-    const supabaseKey = environment.production ? process.env['SUPABASE_KEY'] : environment.supabase.key;
-
-    this._supabase = createClient(supabaseUrl as string, supabaseKey as string);
+    this._supabase = createClient(environment.supabase.url, environment.supabase.key);
   }
 
   async getAllLocations(): Promise<ISGRLocation[]> {
