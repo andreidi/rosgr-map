@@ -1,0 +1,22 @@
+<div class="location-schedule">
+  <div class="location-schedule__list">
+    @if(isLoading) {
+    <div class="location-schedule__loading">
+      <mat-progress-bar mode="query" />
+    </div>
+    }@else {
+    @for (schedule of schedules; track schedule.day) {
+    <div class="location-schedule__list-item">
+      <p>{{ schedule.day }}</p>
+      <p>{{ schedule.hoursInterval }}</p>
+    </div>
+    } @empty {
+    <ng-container [ngTemplateOutlet]="schedulesUnavailable" />
+    }
+    }
+  </div>
+</div>
+
+<ng-template #schedulesUnavailable>
+  <p class="location-schedule__unavailable">Indisponibil pentru această locație.</p>
+</ng-template>

@@ -1,10 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { Observable, of, tap } from 'rxjs';
+import { from, Observable, of, tap } from 'rxjs';
 
 import { CacheService } from '../cache/cache.service';
 import { ASSETS_CONFIG } from '../../utils/constants';
 import { ISGRLocation } from '../../types/location';
+import { SGRLocationService } from '../supabase/locations.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,7 @@ import { ISGRLocation } from '../../types/location';
 export class MapService {
   private _http = inject(HttpClient);
   private _cache = inject(CacheService);
+  private _locations = inject(SGRLocationService);
 
   private _assetsConfig = ASSETS_CONFIG();
 
@@ -40,13 +42,15 @@ export class MapService {
       return of(cachedData);
     }
 
-    return this._http.get(this._assetsConfig.locations, { responseType: 'json' }).pipe(
-      tap((data: any) => {
-        const cachedData = {
-          timestamp: new Date().getTime(),
-          data
-        };
-        this._cache.setData(this._assetsConfig.locationsCacheKey, cachedData);
+    return from(this._locations.getAllLocations()).pipe(
+      tap((data: ISGRLocation[]) => {
+        if (data?.length) {
+          const cachedData = {
+            timestamp: new Date().getTime(),
+            data
+          };
+          this._cache.setData(this._assetsConfig.locationsCacheKey, cachedData);
+        }
       })
     );
   }

@@ -1,0 +1,41 @@
+.location-info {
+  $section-border: 1px solid #e0e0e0;
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+    padding: 0 20px;
+  }
+
+  &__name {
+    font-size: 1.375rem;
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: 1.75rem;
+  }
+
+  &__details {
+    border-top: $section-border;
+    border-bottom: $section-border;
+    margin: 40px 0;
+    padding: 20px;
+
+    &-row {
+      align-items: center;
+      display: flex;
+      flex-direction: row;
+      line-height: 1.25rem;
+      margin-bottom: 10px;
+
+      mat-icon {
+        color: #005cbb;
+        margin-right: 10px;
+      }
+    }
+  }
+
+  &__cta {
+    margin-top: 20px;
+    text-align: center;
+  }
+}

@@ -1,0 +1,55 @@
+.new-location {
+  &__container {
+    backdrop-filter: blur(4px);
+    bottom: 2rem;
+    display: flex;
+    left: 2rem;
+    position: fixed;
+    z-index: 999;
+  }
+
+  &__inner {
+    display: inline-flex;
+    position: relative;
+  }
+
+  &__badge {
+    position: absolute;
+    display: flex;
+    top: 0;
+    right: 0;
+    margin-top: -.25rem;
+    margin-right: -.25rem;
+    width: 1rem;
+    height: 1rem;
+
+    &-animation {
+      animation: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
+      background-color: #39ae70;
+      border-radius: 9999px;
+      display: inline-flex;
+      height: 100%;
+      opacity: .75;
+      position: absolute;
+      width: 100%;
+    }
+
+    &-color {
+      background-color: #39ae70;
+      border-radius: 9999px;
+      display: inline-flex;
+      height: 1rem;
+      position: relative;
+      width: 1rem;
+    }
+  }
+}
+
+@keyframes ping {
+
+  75%,
+  100% {
+    opacity: 0;
+    transform: scale(2);
+  }
+}
