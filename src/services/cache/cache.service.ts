@@ -2,12 +2,12 @@ import { inject, Injectable } from '@angular/core';
 import { LocalStorageService } from '../local-storage/local-storage.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CacheService {
   private _localStorage = inject(LocalStorageService);
 
-  getData(key: string, ttl: number): any {
+  getData(key: string, ttl: number): unknown {
     const cachedData = this._localStorage.getItem(key);
 
     if (cachedData) {
@@ -18,11 +18,15 @@ export class CacheService {
         return parsedData.data;
       } else {
         this._localStorage.removeItem(key);
+
+        return null;
       }
     }
+
+    return null;
   }
 
-  setData(key: string, data: any) {
+  setData(key: string, data: unknown) {
     this._localStorage.setItem(key, JSON.stringify(data));
   }
 }

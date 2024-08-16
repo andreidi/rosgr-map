@@ -1,0 +1,57 @@
+.location-reviews {
+  &__heading {
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.5rem;
+    margin-top: 0;
+  }
+
+  &__summary {
+    border-bottom: 1px solid #e0e0e0;
+    margin-top: -20px;
+    padding: 20px;
+    padding-top: 0;
+  }
+
+  &__ratings {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  &__score {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+
+    &-title {
+      font-size: 3.5rem;
+      font-weight: 400;
+      line-height: 4rem;
+      margin: 0;
+    }
+  }
+
+  &__count {
+    color: #1a73e8;
+    font-size: 0.875rem;
+    font-weight: 500;
+    line-height: 1.25rem;
+  }
+
+  &__list {
+    &-heading {
+      padding: 20px;
+      margin-bottom: -20px;
+
+      h1 {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  &__cta {
+    margin-top: 20px;
+    text-align: center;
+  }
+}

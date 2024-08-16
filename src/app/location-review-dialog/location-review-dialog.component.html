@@ -1,0 +1,43 @@
+@if (isComplete) {
+  <h1 mat-dialog-title>Îți mulțumim pentru contribuție!</h1>
+}
+
+<mat-dialog-content>
+  @if (isLoading) {
+    <div class="location-review-dialog__spinner">
+      <mat-spinner />
+    </div>
+  } @else if (isComplete) {
+    <p>
+      Recenzia ta a fost trimisă spre verificare și va fi publicată după
+      aprobare.
+    </p>
+  } @else {
+    <div class="location-review-dialog__rating">
+      <ngb-rating [(rate)]="ratingStars" />
+    </div>
+
+    <mat-form-field class="location-review-dialog__textarea">
+      <textarea
+        matInput
+        [(ngModel)]="ratingDetails"
+        placeholder="Oferă detalii despre propria experiență în această locație"
+      ></textarea>
+    </mat-form-field>
+  }
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  @if (!isComplete && !isLoading) {
+    <button mat-button mat-dialog-close>Anulează</button>
+    <button
+      mat-flat-button
+      [disabled]="ratingStars === 0"
+      (click)="postNewReview()"
+    >
+      Postează
+    </button>
+  } @else {
+    <button mat-button mat-dialog-close>Închide</button>
+  }
+</mat-dialog-actions>

@@ -1,20 +1,31 @@
-import { AfterViewInit, Component, EventEmitter, inject, NgZone, OnDestroy, output } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  inject,
+  NgZone,
+  OnDestroy,
+  output,
+} from '@angular/core';
 import { Subscription } from 'rxjs';
 import * as L from 'leaflet';
 import 'leaflet.markercluster';
 
 import { MapService } from '../../services/map/map.service';
 import { SuggestLocationFABComponent } from '../suggest-location-fab/suggest-location-fab.component';
-import { BASE_GMAPS_URL, ROMANIA_LATLNG, TILE_LAYER_ATTRIBUTION, TILE_LAYER_MAX_ZOOM, TILE_LAYER_URL } from '../../utils/constants';
+import {
+  ROMANIA_LATLNG,
+  TILE_LAYER_ATTRIBUTION,
+  TILE_LAYER_MAX_ZOOM,
+  TILE_LAYER_URL,
+} from '../../utils/constants';
 import { ISGRLocation } from '../../types/location';
-
 
 @Component({
   selector: 'app-map',
   standalone: true,
   imports: [SuggestLocationFABComponent],
   templateUrl: './map.component.html',
-  styleUrl: './map.component.scss'
+  styleUrl: './map.component.scss',
 })
 export class MapComponent implements AfterViewInit, OnDestroy {
   locationSelected = output<ISGRLocation>();
@@ -37,7 +48,9 @@ export class MapComponent implements AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this._subscriptions$.forEach(subscription$ => subscription$.unsubscribe());
+    this._subscriptions$.forEach((subscription$) =>
+      subscription$.unsubscribe(),
+    );
     this._map.remove();
   }
 
@@ -57,19 +70,21 @@ export class MapComponent implements AfterViewInit, OnDestroy {
       zoom: 8,
       zoomControl: false,
       maxBounds: romaniaBounds,
-      maxBoundsViscosity: 1.0
+      maxBoundsViscosity: 1.0,
     });
 
     // Add tile layer
     L.tileLayer(TILE_LAYER_URL, {
       maxZoom: TILE_LAYER_MAX_ZOOM,
-      attribution: TILE_LAYER_ATTRIBUTION
+      attribution: TILE_LAYER_ATTRIBUTION,
     }).addTo(this._map);
 
     // Set minimum zoom level
     this._map.setMinZoom(this._map.getBoundsZoom(romaniaBounds));
 
-    const subscription = this._mapService.getCountryGeoJSONData()
+    const subscription = this._mapService
+      .getCountryGeoJSONData()
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       .subscribe((romaniaData: any) => {
         if (romaniaData) {
           L.geoJSON(romaniaData, {
@@ -77,7 +92,7 @@ export class MapComponent implements AfterViewInit, OnDestroy {
               color: '#2e7d32',
               weight: 2,
               opacity: 0.8,
-              fillOpacity: 0
+              fillOpacity: 0,
             },
             onEachFeature: (_feature, layer) => {
               layer.on('click', () => {
@@ -99,16 +114,17 @@ export class MapComponent implements AfterViewInit, OnDestroy {
   private _addLocationMarkers(): void {
     const icon = L.icon({
       iconSize: [40, 80],
-      iconUrl: 'map_marker.svg'
+      iconUrl: 'map_marker.svg',
     });
 
     const markers = window.L.markerClusterGroup({
       chunkedLoading: true,
       disableClusteringAtZoom: TILE_LAYER_MAX_ZOOM - 1,
-      animate: false
+      animate: false,
     });
 
-    const subscription = this._mapService.getSGRLocationsData()
+    const subscription = this._mapService
+      .getSGRLocationsData()
       .subscribe((locations: ISGRLocation[]) => {
         if (locations) {
           locations.forEach((location: ISGRLocation) => {
@@ -116,7 +132,7 @@ export class MapComponent implements AfterViewInit, OnDestroy {
 
             marker.bindPopup(location.name);
 
-            marker.on('popupopen', ({ target }) => {
+            marker.on('popupopen', () => {
               this.locationSelected.emit(location);
             });
             marker.on('popupclose', () => {
@@ -142,10 +158,11 @@ export class MapComponent implements AfterViewInit, OnDestroy {
     const locateControl = L.Control.extend({
       options: { position },
       onAdd: () => {
-        const container = L.DomUtil.create('div', 'leaflet-bar leaflet-control leaflet-control-custom');
-        const containerStyles: {
-          [key: string]: string;
-        } = {
+        const container = L.DomUtil.create(
+          'div',
+          'leaflet-bar leaflet-control leaflet-control-custom',
+        );
+        const containerStyles: Record<string, string> = {
           backgroundColor: 'white',
           backgroundImage: 'url("/map_crosshairs.svg")',
           backgroundRepeat: 'no-repeat',
@@ -156,9 +173,10 @@ export class MapComponent implements AfterViewInit, OnDestroy {
           opacity: '0.7',
           padding: '5px',
           width: '20px',
-        }
+        };
 
         for (const [styleKey, styleValue] of Object.entries(containerStyles)) {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (container.style as any)[styleKey] = styleValue;
         }
 
@@ -167,7 +185,7 @@ export class MapComponent implements AfterViewInit, OnDestroy {
         };
 
         return container;
-      }
+      },
     });
 
     // Add Locate control to map
@@ -189,10 +207,13 @@ export class MapComponent implements AfterViewInit, OnDestroy {
   private _setUserLocation(): void {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(({ coords }) => {
-        const userLatLng: L.LatLngExpression = [coords.latitude, coords.longitude];
+        const userLatLng: L.LatLngExpression = [
+          coords.latitude,
+          coords.longitude,
+        ];
         const icon = L.icon({
           iconUrl: 'map_user.svg',
-          iconSize: [20, 20]
+          iconSize: [20, 20],
         });
 
         this._userLocation = userLatLng;

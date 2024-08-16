@@ -8,6 +8,7 @@ export interface ISGRLocation {
   county: string;
   rvmCount: number;
   type: ESGRLocationType;
+  verified: boolean;
 }
 
 export interface ISGRLocationSchedule {
@@ -15,15 +16,18 @@ export interface ISGRLocationSchedule {
   hoursInterval: string;
 }
 
-export interface ISGRLocationReview {
-  id: number;
+export interface ISGRLocationReviewCreate {
   locationId: string;
   stars: number;
   details: string;
-  created_at: number;
+}
+
+export interface ISGRLocationReview extends ISGRLocationReviewCreate {
+  id: number;
+  createdAt: number;
 }
 
 export enum ESGRLocationType {
   AUTOMATIC = 'Automat',
-  MANUAL = 'Manual'
+  MANUAL = 'Manual',
 }

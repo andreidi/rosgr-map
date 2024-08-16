@@ -1,48 +1,66 @@
 @let locationInfo = location();
 @let navigationUrl = googleMapsUrl();
 
-@if(locationInfo) {
-<section class="location-info__container">
-  <h1 class="location-info__name">{{locationInfo.name}}</h1>
-</section>
+@if (locationInfo) {
+  <section class="location-info__container">
+    <div class="location-info__header">
+      <h1 class="location-info__name">
+        {{ locationInfo.name }}
+      </h1>
 
-<section class="location-info__container">
-  @if(navigationUrl) {
-  <a mat-stroked-button [href]="navigationUrl" target="_blank">
-    <mat-icon>directions</mat-icon>
-    Navighează la adresă
-  </a>
-  }
+      @if (locationInfo.verified) {
+        <mat-icon
+          class="location-info__verified"
+          matTooltip="Locație verificată de comunitate. Informațiile au fost confirmate de la fața locului."
+        >
+          verified
+        </mat-icon>
+      }
+    </div>
+  </section>
 
-</section>
+  <section class="location-info__container">
+    @if (navigationUrl) {
+      <a mat-stroked-button [href]="navigationUrl" target="_blank">
+        <mat-icon>directions</mat-icon>
+        Navighează la adresă
+      </a>
+    }
+  </section>
 
-<section class="location-info__container location-info__details">
-  <div class="location-info__details-row">
-    <mat-icon>location_on</mat-icon>
-    <p>{{locationInfo.address}}</p>
-  </div>
-
-  <div class="location-info__details-row">
-    <mat-icon>numbers</mat-icon>
-    <p>Automate disponibile: <strong>{{locationInfo.rvmCount}}</strong></p>
-  </div>
-
-  <div>
+  <section class="location-info__container location-info__details">
     <div class="location-info__details-row">
-      <mat-icon>schedule</mat-icon>
-      <p>Program de funcționare:</p>
+      <mat-icon>location_on</mat-icon>
+      <p>{{ locationInfo.address }}</p>
     </div>
 
-    <app-location-schedule [locationId]="locationInfo.id" />
-  </div>
+    <div class="location-info__details-row">
+      <mat-icon>numbers</mat-icon>
+      <p>
+        Automate disponibile: <strong>{{ locationInfo.rvmCount }}</strong>
+      </p>
+    </div>
 
-  <div class="location-info__cta">
-    <a mat-button [href]="feedbackFormUrl()" target="_blank">
-      <mat-icon>edit</mat-icon>
-      Sugerează o modificare
-    </a>
-  </div>
-</section>
+    <div>
+      <div class="location-info__details-row">
+        <mat-icon>schedule</mat-icon>
+        <p>Program de funcționare:</p>
+      </div>
+
+      <app-location-schedule [locationId]="locationInfo.id" />
+    </div>
+
+    <div class="location-info__cta">
+      <a mat-stroked-button [href]="feedbackFormUrl()" target="_blank">
+        <mat-icon>edit</mat-icon>
+        Sugerează o modificare
+      </a>
+    </div>
+  </section>
+
+  <section>
+    <app-location-reviews [locationId]="locationInfo.id" />
+  </section>
 } @else {
-<mat-spinner />
+  <mat-spinner />
 }

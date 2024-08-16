@@ -8,7 +8,7 @@ import { ISGRLocation } from '../../types/location';
 import { SGRLocationService } from '../supabase/locations.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class MapService {
   private _http = inject(HttpClient);
@@ -17,26 +17,34 @@ export class MapService {
 
   private _assetsConfig = ASSETS_CONFIG();
 
-  getCountryGeoJSONData(): Observable<Object> {
-    const cachedData = this._cache.getData(this._assetsConfig.geoJSONCacheKey, this._assetsConfig.geoJSONCacheTTL);
+  getCountryGeoJSONData(): Observable<object> {
+    const cachedData = this._cache.getData(
+      this._assetsConfig.geoJSONCacheKey,
+      this._assetsConfig.geoJSONCacheTTL,
+    );
 
     if (cachedData) {
       return of(cachedData);
     }
 
-    return this._http.get(this._assetsConfig.geoJSON, { responseType: 'json' }).pipe(
-      tap(data => {
-        const cachedData = {
-          timestamp: new Date().getTime(),
-          data
-        };
-        this._cache.setData(this._assetsConfig.geoJSONCacheKey, cachedData);
-      })
-    );
+    return this._http
+      .get(this._assetsConfig.geoJSON, { responseType: 'json' })
+      .pipe(
+        tap((data) => {
+          const cachedData = {
+            timestamp: new Date().getTime(),
+            data,
+          };
+          this._cache.setData(this._assetsConfig.geoJSONCacheKey, cachedData);
+        }),
+      );
   }
 
   getSGRLocationsData(): Observable<ISGRLocation[]> {
-    const cachedData = this._cache.getData(this._assetsConfig.locationsCacheKey, this._assetsConfig.locationsCacheTTL);
+    const cachedData = this._cache.getData(
+      this._assetsConfig.locationsCacheKey,
+      this._assetsConfig.locationsCacheTTL,
+    ) as ISGRLocation[];
 
     if (cachedData) {
       return of(cachedData);
@@ -47,11 +55,11 @@ export class MapService {
         if (data?.length) {
           const cachedData = {
             timestamp: new Date().getTime(),
-            data
+            data,
           };
           this._cache.setData(this._assetsConfig.locationsCacheKey, cachedData);
         }
-      })
+      }),
     );
   }
 }
