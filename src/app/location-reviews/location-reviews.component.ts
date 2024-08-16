@@ -12,6 +12,7 @@ import { SGRLocationService } from '../../services/supabase/locations.service';
 import { LocationReviewDialogComponent } from '../location-review-dialog/location-review-dialog.component';
 import { NgbRating } from '../../components/rating/rating.component';
 import { DEFAULT_STAR_COUNTS } from '../../utils/constants';
+import { LocationReviewComponent } from "../location-review/location-review.component";
 
 @Component({
   selector: 'app-location-reviews',
@@ -23,7 +24,8 @@ import { DEFAULT_STAR_COUNTS } from '../../utils/constants';
     MatTooltipModule,
     NgbRating,
     DecimalPipe,
-  ],
+    LocationReviewComponent
+],
   templateUrl: './location-reviews.component.html',
   styleUrl: './location-reviews.component.scss',
 })

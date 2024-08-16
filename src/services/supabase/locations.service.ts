@@ -57,7 +57,7 @@ export class SGRLocationService {
   async getLocationReviews(locationId: string): Promise<ISGRLocationReview[]> {
     const { data, error } = await this._supabase
       .from(locationReviews)
-      .select('createdAt, details, stars')
+      .select('id, createdAt, details, stars')
       .filter('locationId', 'eq', locationId)
       .filter('approved', 'eq', true);
 

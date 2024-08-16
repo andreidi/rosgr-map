@@ -73,14 +73,7 @@
         </div>
 
         @for (review of reviews; track review.id) {
-          <div class="location-reviews__list-item">
-            <ngb-rating
-              [rate]="review.stars"
-              [readonly]="true"
-              iconSize="20px"
-            />
-            <p class="location-reviews__details">{{ review.details }}</p>
-          </div>
+          <app-location-review [review]="review" />
         }
       </div>
     }

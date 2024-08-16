@@ -1,0 +1,12 @@
+@let reviewData = review();
+
+<div class="location-review">
+  <div class="location-review__header">
+    <ngb-rating [rate]="reviewData.stars" [readonly]="true" iconSize="20px" class="location-review__rating" />
+
+    <p class="location-review__date">
+      {{ getReviewDate(reviewData.createdAt) }}
+    </p>
+  </div>
+  <p class="location-review__details">{{ reviewData.details }}</p>
+</div>
