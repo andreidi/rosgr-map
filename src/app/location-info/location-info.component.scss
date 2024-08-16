@@ -1,6 +1,20 @@
 .location-info {
   $section-border: 1px solid #e0e0e0;
 
+  &__header {
+    display: flex;
+    align-items: center;
+
+    h1 {
+      margin-right: .5rem;
+    }
+  }
+
+  &__verified {
+    color: #39ae70;
+    cursor: help;
+  }
+
   &__container {
     display: flex;
     flex-direction: column;

@@ -28,7 +28,7 @@ export class SGRLocationService {
   async getAllLocations(): Promise<ISGRLocation[]> {
     const { data, error } = await this._supabase
       .from(locations)
-      .select('id, name, lat, lng, address, rvmCount');
+      .select('id, name, lat, lng, address, rvmCount, verified');
 
     if (error) {
       console.error('Failed to retrieve location data', error);

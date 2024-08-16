@@ -3,7 +3,20 @@
 
 @if (locationInfo) {
   <section class="location-info__container">
-    <h1 class="location-info__name">{{ locationInfo.name }}</h1>
+    <div class="location-info__header">
+      <h1 class="location-info__name">
+        {{ locationInfo.name }}
+      </h1>
+
+      @if (locationInfo.verified) {
+        <mat-icon
+          class="location-info__verified"
+          matTooltip="Locație verificată de comunitate. Informațiile au fost confirmate de la fața locului."
+        >
+          verified
+        </mat-icon>
+      }
+    </div>
   </section>
 
   <section class="location-info__container">

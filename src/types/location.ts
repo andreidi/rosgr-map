@@ -8,6 +8,7 @@ export interface ISGRLocation {
   county: string;
   rvmCount: number;
   type: ESGRLocationType;
+  verified: boolean;
 }
 
 export interface ISGRLocationSchedule {
