@@ -1,4 +1,4 @@
-import { Component, effect, inject, input } from '@angular/core';
+import { Component, effect, inject, input, OnDestroy } from '@angular/core';
 import { CommonModule, DecimalPipe } from '@angular/common';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatButtonModule } from '@angular/material/button';
@@ -9,7 +9,7 @@ import { from, Subscription } from 'rxjs';
 import { ISGRLocationReview } from '../../types/location';
 import { SGRLocationService } from '../../services/supabase/locations.service';
 import { LocationReviewDialogComponent } from '../location-review-dialog/location-review-dialog.component';
-import { NgbRating } from '../../components/rating/rating.component';
+import { NgbRatingComponent } from '../../components/rating/rating.component';
 import { DEFAULT_STAR_COUNTS } from '../../utils/constants';
 import { LocationReviewComponent } from '../location-review/location-review.component';
 import { LocationReviewsSummaryComponent } from '../location-reviews-summary/location-reviews-summary.component';
@@ -22,7 +22,7 @@ import { LocationReviewsSummaryComponent } from '../location-reviews-summary/loc
     MatButtonModule,
     MatProgressBarModule,
     MatIconModule,
-    NgbRating,
+    NgbRatingComponent,
     DecimalPipe,
     LocationReviewComponent,
     LocationReviewsSummaryComponent,
@@ -30,12 +30,12 @@ import { LocationReviewsSummaryComponent } from '../location-reviews-summary/loc
   templateUrl: './location-reviews.component.html',
   styleUrl: './location-reviews.component.scss',
 })
-export class LocationReviewsComponent {
+export class LocationReviewsComponent implements OnDestroy {
   readonly dialog = inject(MatDialog);
 
   locationId = input.required<string>();
   reviews: ISGRLocationReview[] = [];
-  locationScore: number = 0;
+  locationScore = 0;
   starCounts: number[][] = DEFAULT_STAR_COUNTS;
 
   isLoading = true;
@@ -91,12 +91,13 @@ export class LocationReviewsComponent {
       '3': 0,
       '2': 0,
       '1': 0,
+      // eslint-disable-next-line @typescript-eslint/consistent-indexed-object-style
     } as { [key: string]: number };
 
     this.reviews.forEach(({ stars }) => {
       const starLabel = String(stars);
 
-      if (starCountsObj.hasOwnProperty(starLabel)) {
+      if (starLabel in starCountsObj) {
         starCountsObj[starLabel]++;
       }
     });

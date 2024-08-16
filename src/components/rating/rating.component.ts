@@ -38,6 +38,7 @@ export interface StarTemplateContext {
  * A directive that helps visualising and interacting with a star rating bar.
  */
 @Component({
+  // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'ngb-rating',
   standalone: true,
   imports: [NgTemplateOutlet],
@@ -62,12 +63,14 @@ export interface StarTemplateContext {
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => NgbRating),
+      useExisting: forwardRef(() => NgbRatingComponent),
       multi: true,
     },
   ],
 })
-export class NgbRating implements ControlValueAccessor, OnInit, OnChanges {
+export class NgbRatingComponent
+  implements ControlValueAccessor, OnInit, OnChanges
+{
   contexts: StarTemplateContext[] = [];
   nextRate!: number;
 
@@ -87,7 +90,7 @@ export class NgbRating implements ControlValueAccessor, OnInit, OnChanges {
   /**
    * The current rating. Could be a decimal value like `3.75`.
    */
-  @Input() rate: number = 0;
+  @Input() rate = 0;
 
   /**
    * If `true`, the rating can't be changed.
@@ -149,7 +152,9 @@ export class NgbRating implements ControlValueAccessor, OnInit, OnChanges {
    */
   @Output() rateChange = new EventEmitter<number>(true);
 
+  // eslint-disable-next-line @typescript-eslint/no-empty-function, @typescript-eslint/no-unused-vars, @typescript-eslint/no-explicit-any
   onChange = (_: any) => {};
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
   onTouched = () => {};
 
   isInteractive(): boolean {
@@ -211,10 +216,12 @@ export class NgbRating implements ControlValueAccessor, OnInit, OnChanges {
     this._updateState(this.rate);
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   registerOnChange(fn: (value: any) => any): void {
     this.onChange = fn;
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   registerOnTouched(fn: () => any): void {
     this.onTouched = fn;
   }

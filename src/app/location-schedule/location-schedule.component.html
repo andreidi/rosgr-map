@@ -11,14 +11,10 @@
           <p>{{ schedule.hoursInterval }}</p>
         </div>
       } @empty {
-        <ng-container [ngTemplateOutlet]="schedulesUnavailable" />
+        <p class="location-schedule__unavailable">
+          Indisponibil pentru această locație.
+        </p>
       }
     }
   </div>
 </div>
-
-<ng-template #schedulesUnavailable>
-  <p class="location-schedule__unavailable">
-    Indisponibil pentru această locație.
-  </p>
-</ng-template>

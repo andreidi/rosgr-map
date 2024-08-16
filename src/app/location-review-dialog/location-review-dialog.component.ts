@@ -12,7 +12,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
-import { NgbRatingModule } from '../../components/rating/rating.module';
+import { NgbRatingComponent } from '../../components/rating/rating.component';
 import { SGRLocationService } from '../../services/supabase/locations.service';
 
 @Component({
@@ -30,7 +30,7 @@ import { SGRLocationService } from '../../services/supabase/locations.service';
     MatDialogTitle,
     MatButtonModule,
     MatProgressSpinnerModule,
-    NgbRatingModule,
+    NgbRatingComponent,
   ],
 })
 export class LocationReviewDialogComponent {

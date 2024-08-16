@@ -2,13 +2,13 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { formatRelative } from 'date-fns';
 import { ro } from 'date-fns/locale';
 
-import { NgbRating } from '../../components/rating/rating.component';
+import { NgbRatingComponent } from '../../components/rating/rating.component';
 import { ISGRLocationReview } from '../../types/location';
 
 @Component({
   selector: 'app-location-review',
   standalone: true,
-  imports: [NgbRating],
+  imports: [NgbRatingComponent],
   templateUrl: './location-review.component.html',
   styleUrl: './location-review.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

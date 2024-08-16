@@ -3,11 +3,10 @@ import { Injectable } from '@angular/core';
 const localStorage = window.localStorage;
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class LocalStorageService {
-
-  setItem(key: string, value: any) {
+  setItem(key: string, value: unknown) {
     try {
       localStorage.setItem(key, JSON.stringify(value));
     } catch (error) {
