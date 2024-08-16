@@ -1,0 +1,22 @@
+<ng-template #t let-fill="fill">
+  <span class="rating-star" [style.color]="fill === 100 ? '#ffc107' : ''">
+    <i class="material-icons" [style.fontSize]="iconSize">
+      {{ fill === 100 ? "star" : "star_border" }}
+    </i>
+  </span>
+</ng-template>
+
+@for (_ of contexts; track _; let index = $index) {
+  <span class="visually-hidden">({{ index < nextRate ? "*" : " " }})</span>
+
+  <span
+    (mouseenter)="enter(index + 1)"
+    (click)="handleClick(index + 1)"
+    [style.cursor]="isInteractive() ? 'pointer' : 'default'"
+  >
+    <ng-template
+      [ngTemplateOutlet]="t"
+      [ngTemplateOutletContext]="contexts[index]"
+    />
+  </span>
+}

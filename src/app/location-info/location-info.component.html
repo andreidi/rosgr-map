@@ -38,11 +38,15 @@
     </div>
 
     <div class="location-info__cta">
-      <a mat-button [href]="feedbackFormUrl()" target="_blank">
+      <a mat-stroked-button [href]="feedbackFormUrl()" target="_blank">
         <mat-icon>edit</mat-icon>
         Sugerează o modificare
       </a>
     </div>
+  </section>
+
+  <section>
+    <app-location-reviews [locationId]="locationInfo.id" />
   </section>
 } @else {
   <mat-spinner />

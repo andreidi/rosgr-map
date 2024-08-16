@@ -17,13 +17,16 @@ export interface ISGRLocationSchedule {
 
 export interface ISGRLocationReview {
   id: number;
+  createdAt: number;
   locationId: string;
   stars: number;
   details: string;
-  created_at: number;
 }
+
+export interface ISGRLocationReviewCreate
+  extends Omit<ISGRLocationReview, 'id' | 'createdAt'> {}
 
 export enum ESGRLocationType {
   AUTOMATIC = 'Automat',
-  MANUAL = 'Manual'
+  MANUAL = 'Manual',
 }

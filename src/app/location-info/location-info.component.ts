@@ -6,13 +6,14 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ISGRLocation } from '../../types/location';
 import { BASE_GMAPS_URL } from '../../utils/constants';
 import { LocationScheduleComponent } from '../location-schedule/location-schedule.component';
+import { LocationReviewsComponent } from "../location-reviews/location-reviews.component";
 
 const LOCATION_CHANGES_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSeyL2ktD-liSX6xDRI44ZO3TWdQJMajpkltliQeS8T1ohCYzQ/viewform?usp=pp_url&entry.1657893088=Modificare+detalii+locatie:+';
 
 @Component({
   selector: 'app-location-info',
   standalone: true,
-  imports: [MatButtonModule, MatIconModule, MatProgressSpinnerModule, LocationScheduleComponent],
+  imports: [MatButtonModule, MatIconModule, MatProgressSpinnerModule, LocationScheduleComponent, LocationReviewsComponent],
   templateUrl: './location-info.component.html',
   styleUrl: './location-info.component.scss'
 })
