@@ -6,46 +6,11 @@
       <h1 class="location-reviews__heading">Rezumatul recenziilor</h1>
 
       <div class="location-reviews__ratings">
-        <div class="location-reviews__scores">
-          <table>
-            <tbody>
-              @for (star of starCounts; track star[0]) {
-                @let label = star[0];
-                @let count = star[1];
-                @let percent = star[2];
-                @let tooltip = getScoreRowTooltip(label, count);
-
-                <tr
-                  class="location-reviews__scores-row"
-                  role="img"
-                  [matTooltip]="tooltip"
-                  matTooltipPosition="above"
-                  [attr.aria-label]="tooltip"
-                >
-                  <td
-                    class="location-reviews__scores-label"
-                    role="presentation"
-                  >
-                    {{ label }}
-                  </td>
-
-                  <td role="presentation">
-                    <div class="location-reviews__scores-bar">
-                      <div
-                        class="location-reviews__scores-fill"
-                        [style.paddingLeft]="percent + '%'"
-                      ></div>
-                    </div>
-                  </td>
-                </tr>
-              }
-            </tbody>
-          </table>
-        </div>
+        <app-location-reviews-summary [starCounts]="starCounts" />
 
         <div class="location-reviews__score">
           <h2 class="location-reviews__score-title">
-            {{ locationScore | number: "1.0-1" }}
+            {{ locationScore | number: "1.1" }}
           </h2>
 
           <ngb-rating

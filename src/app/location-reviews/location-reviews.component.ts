@@ -4,7 +4,6 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialog } from '@angular/material/dialog';
-import { MatTooltipModule } from '@angular/material/tooltip';
 import { DecimalPipe } from '@angular/common';
 
 import { ISGRLocationReview } from '../../types/location';
@@ -13,6 +12,7 @@ import { LocationReviewDialogComponent } from '../location-review-dialog/locatio
 import { NgbRating } from '../../components/rating/rating.component';
 import { DEFAULT_STAR_COUNTS } from '../../utils/constants';
 import { LocationReviewComponent } from "../location-review/location-review.component";
+import { LocationReviewsSummaryComponent } from "../location-reviews-summary/location-reviews-summary.component";
 
 @Component({
   selector: 'app-location-reviews',
@@ -21,10 +21,10 @@ import { LocationReviewComponent } from "../location-review/location-review.comp
     MatButtonModule,
     MatProgressBarModule,
     MatIconModule,
-    MatTooltipModule,
     NgbRating,
     DecimalPipe,
-    LocationReviewComponent
+    LocationReviewComponent,
+    LocationReviewsSummaryComponent
 ],
   templateUrl: './location-reviews.component.html',
   styleUrl: './location-reviews.component.scss',
@@ -107,9 +107,5 @@ export class LocationReviewsComponent {
         (count / this.reviews.length) * 100,
       ])
       .sort((a, b) => b[0] - a[0]);
-  }
-
-  getScoreRowTooltip(label: number, count: number) {
-    return `${label} stele: ${count} recenzii`;
   }
 }

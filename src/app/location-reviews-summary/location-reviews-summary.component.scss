@@ -1,0 +1,31 @@
+.reviews-summary {
+  flex: 1;
+  margin-right: 24px;
+
+  table {
+    width: 100%;
+  }
+
+  &__label {
+    color: #70757a;
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 1.25rem;
+    width: 20px;
+  }
+
+  &__bar {
+    border-radius: 4px;
+    height: 8px;
+    background-color: #f1f3f4;
+  }
+
+  &__fill {
+    background-color: #fbbc04;
+    border-color: #fbbc04;
+    border-style: solid;
+    border-width: 4px 1px;
+    border-radius: 4px;
+    width: 0;
+  }
+}
