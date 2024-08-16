@@ -1,31 +1,32 @@
 import { Component, effect, inject, input } from '@angular/core';
-import { from, Subscription } from 'rxjs';
+import { CommonModule, DecimalPipe } from '@angular/common';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialog } from '@angular/material/dialog';
-import { DecimalPipe } from '@angular/common';
+import { from, Subscription } from 'rxjs';
 
 import { ISGRLocationReview } from '../../types/location';
 import { SGRLocationService } from '../../services/supabase/locations.service';
 import { LocationReviewDialogComponent } from '../location-review-dialog/location-review-dialog.component';
 import { NgbRating } from '../../components/rating/rating.component';
 import { DEFAULT_STAR_COUNTS } from '../../utils/constants';
-import { LocationReviewComponent } from "../location-review/location-review.component";
-import { LocationReviewsSummaryComponent } from "../location-reviews-summary/location-reviews-summary.component";
+import { LocationReviewComponent } from '../location-review/location-review.component';
+import { LocationReviewsSummaryComponent } from '../location-reviews-summary/location-reviews-summary.component';
 
 @Component({
   selector: 'app-location-reviews',
   standalone: true,
   imports: [
+    CommonModule,
     MatButtonModule,
     MatProgressBarModule,
     MatIconModule,
     NgbRating,
     DecimalPipe,
     LocationReviewComponent,
-    LocationReviewsSummaryComponent
-],
+    LocationReviewsSummaryComponent,
+  ],
   templateUrl: './location-reviews.component.html',
   styleUrl: './location-reviews.component.scss',
 })

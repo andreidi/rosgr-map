@@ -1,7 +1,7 @@
 <div class="location-reviews">
   @if (isLoading) {
     <mat-progress-bar mode="query" />
-  } @else {
+  } @else if (reviews.length) {
     <div class="location-reviews__summary">
       <h1 class="location-reviews__heading">Rezumatul recenziilor</h1>
 
@@ -23,24 +23,28 @@
         </div>
       </div>
 
-      <div class="location-reviews__cta">
-        <button mat-stroked-button (click)="openNewReviewDialog()">
-          <mat-icon>rate_review</mat-icon>
-          Scrie o recenzie
-        </button>
-      </div>
+      <ng-container [ngTemplateOutlet]="addReviewButton" />
     </div>
 
-    @if (reviews.length) {
-      <div class="location-reviews__list">
-        <div class="location-reviews__list-heading">
-          <h1 class="location-reviews__heading">Toate recenziile</h1>
-        </div>
-
-        @for (review of reviews; track review.id) {
-          <app-location-review [review]="review" />
-        }
+    <div class="location-reviews__list">
+      <div class="location-reviews__list-heading">
+        <h1 class="location-reviews__heading">Toate recenziile</h1>
       </div>
-    }
+
+      @for (review of reviews; track review.id) {
+        <app-location-review [review]="review" />
+      }
+    </div>
+  } @else {
+    <ng-container [ngTemplateOutlet]="addReviewButton" />
   }
 </div>
+
+<ng-template #addReviewButton>
+  <div class="location-reviews__cta">
+    <button mat-stroked-button (click)="openNewReviewDialog()">
+      <mat-icon>rate_review</mat-icon>
+      Scrie o recenzie
+    </button>
+  </div>
+</ng-template>
