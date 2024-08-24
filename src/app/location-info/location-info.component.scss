@@ -12,6 +12,14 @@
 
   &__verified {
     color: #39ae70;
+  }
+
+  &__warning {
+    color: #fb8c00;
+  }
+
+  &__verified,
+  &__warning {
     cursor: help;
   }
 

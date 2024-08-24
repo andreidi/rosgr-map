@@ -15,6 +15,13 @@
         >
           verified
         </mat-icon>
+      } @else if (locationInfo.verified === false) {
+        <mat-icon
+          class="location-info__warning"
+          matTooltip="Această locație nu este confirmată. Informațiile pot fi incomplete sau inexacte."
+        >
+          warning
+        </mat-icon>
       }
     </div>
   </section>
