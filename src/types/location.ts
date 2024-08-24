@@ -7,7 +7,6 @@ export interface ISGRLocation {
   city: string;
   county: string;
   rvmCount: number;
-  type: ESGRLocationType;
   verified: boolean;
 }
 
@@ -25,9 +24,4 @@ export interface ISGRLocationReviewCreate {
 export interface ISGRLocationReview extends ISGRLocationReviewCreate {
   id: number;
   createdAt: number;
-}
-
-export enum ESGRLocationType {
-  AUTOMATIC = 'Automat',
-  MANUAL = 'Manual',
 }
