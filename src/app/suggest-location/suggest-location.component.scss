@@ -1,0 +1,20 @@
+.suggest-location {
+  &__form {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+  }
+
+  &__action {
+    display: flex;
+    justify-content: flex-end;
+    padding: 1rem;
+  }
+
+  &__fab {
+    bottom: 2rem;
+    left: 2rem;
+    position: fixed;
+    z-index: 10;
+  }
+}

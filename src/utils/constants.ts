@@ -9,7 +9,7 @@ export const ROMANIA_LATLNG = [45.9432, 24.9668];
 export const BASE_GMAPS_URL =
   'https://www.google.com/maps/search/?api=1&query=';
 
-export const NEW_LOCATION_FORM_URL = 'https://forms.gle/GFSGPTKv5YgreLTt8';
+export const NEW_LOCATION_FORM_URL = 'sugestie-locatie';
 
 export const FEEDBACK_FORM_URL = 'https://forms.gle/qXZ8g5rKovr6tLZM8';
 
@@ -28,6 +28,7 @@ export const SUPABASE_TABLES = () => {
     locations: 'locations',
     locationSchedules: 'location_schedules',
     locationReviews: 'location_reviews',
+    locationSuggestions: 'location_suggestions',
   };
 };
 

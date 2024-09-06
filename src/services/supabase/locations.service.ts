@@ -4,13 +4,16 @@ import { createClient, SupabaseClient } from '@supabase/supabase-js';
 import { environment } from '../../environments/environment';
 import { SUPABASE_TABLES } from '../../utils/constants';
 import {
+  IGMapsLocationSuggestion,
+  IManualLocationSuggestion,
   ISGRLocation,
   ISGRLocationReview,
   ISGRLocationReviewCreate,
   ISGRLocationSchedule,
 } from '../../types/location';
 
-const { locations, locationSchedules, locationReviews } = SUPABASE_TABLES();
+const { locations, locationSchedules, locationReviews, locationSuggestions } =
+  SUPABASE_TABLES();
 
 @Injectable({
   providedIn: 'root',
@@ -76,6 +79,19 @@ export class SGRLocationService {
 
     if (error) {
       console.error('Failed to create location review', error);
+      throw error;
+    }
+  }
+
+  async createLocationSuggestion(
+    suggestion: IGMapsLocationSuggestion | IManualLocationSuggestion,
+  ) {
+    const { error } = await this._supabase
+      .from(locationSuggestions)
+      .insert([suggestion]);
+
+    if (error) {
+      console.error('Failed to create location suggestion', error);
       throw error;
     }
   }
