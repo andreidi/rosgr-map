@@ -7,7 +7,6 @@ export interface ISGRLocation {
   city: string;
   county: string;
   rvmCount: number;
-  type: ESGRLocationType;
   verified: boolean;
 }
 
@@ -27,7 +26,20 @@ export interface ISGRLocationReview extends ISGRLocationReviewCreate {
   createdAt: number;
 }
 
-export enum ESGRLocationType {
-  AUTOMATIC = 'Automat',
-  MANUAL = 'Manual',
+export enum ELocationSuggestionType {
+  NEW = 'new',
+  EDIT = 'edit',
+}
+
+export interface IGMapsLocationSuggestion {
+  gMapsURL: string;
+  schedule?: string;
+  rvmCount?: number;
+}
+
+export interface IManualLocationSuggestion
+  extends Omit<ISGRLocation, 'verified' | 'id'> {
+  locationId?: string;
+  schedule?: string;
+  suggestionType: ELocationSuggestionType;
 }

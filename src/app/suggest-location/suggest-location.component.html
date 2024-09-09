@@ -1,0 +1,113 @@
+<mat-tab-group class="suggest-location__tabs">
+  <mat-tab label="Folosește Google Maps">
+    <mat-stepper [linear]="true">
+      <mat-step label="Instrucțiuni">
+        <div>
+          <p>
+            Deschide
+            <a href="https://www.google.com/maps" target="_blank">Google Maps</a
+            >.
+          </p>
+          <p>Selectează locația pe care dorești sa o propui.</p>
+          <p>Copiază link-ul din bara de adrese a browserului tău.</p>
+
+          <div class="suggest-location__action">
+            <button mat-stroked-button matStepperNext>Pasul următor</button>
+          </div>
+        </div>
+      </mat-step>
+
+      <mat-step [stepControl]="firstGMapsForm" label="Link-ul locației">
+        <form [formGroup]="firstGMapsForm" class="suggest-location__form">
+          <mat-form-field>
+            <mat-label>Introdu link-ul din Google Maps</mat-label>
+            <input matInput formControlName="url" type="url" required />
+          </mat-form-field>
+        </form>
+
+        <div class="suggest-location__action">
+          <button mat-stroked-button matStepperNext>Pasul următor</button>
+        </div>
+      </mat-step>
+
+      <mat-step [stepControl]="firstGMapsForm" label="Detalii suplimentare">
+        <form [formGroup]="secondGMapsForm" class="suggest-location__form">
+          <mat-form-field>
+            <mat-label>Numărul de automate disponibile</mat-label>
+            <input matInput type="number" formControlName="rvmCount" />
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>Program de lucru</mat-label>
+            <textarea matInput formControlName="schedule"></textarea>
+          </mat-form-field>
+        </form>
+
+        <div class="suggest-location__action">
+          <button mat-flat-button (click)="saveUsingGoogleMapsLink()">
+            Trimite sugestia
+          </button>
+        </div>
+      </mat-step>
+    </mat-stepper>
+  </mat-tab>
+
+  <mat-tab label="Introdu datele manual">
+    <form [formGroup]="manualLocationForm" class="suggest-location__form">
+      <!-- Required fields -->
+      <mat-form-field>
+        <mat-label>Nume</mat-label>
+        <input matInput formControlName="name" required />
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Adresa</mat-label>
+        <input matInput formControlName="address" required />
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Latitudine</mat-label>
+        <input matInput formControlName="lat" required />
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Longitudine</mat-label>
+        <input matInput formControlName="lng" required />
+      </mat-form-field>
+
+      <!-- Optional fields -->
+      <mat-form-field>
+        <mat-label>Oraș</mat-label>
+        <input matInput formControlName="city" />
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Județ</mat-label>
+        <input matInput formControlName="county" />
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Numărul de automate disponibile</mat-label>
+        <input matInput type="number" formControlName="rvmCount" />
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Program de lucru</mat-label>
+        <textarea matInput formControlName="schedule"></textarea>
+      </mat-form-field>
+    </form>
+
+    <div class="suggest-location__action">
+      <button mat-flat-button (click)="saveManually()">Trimite sugestia</button>
+    </div>
+  </mat-tab>
+</mat-tab-group>
+
+<a
+  mat-fab
+  routerLink="/"
+  class="suggest-location__fab"
+  aria-label="Înapoi la hartă"
+>
+  <mat-icon>arrow_back</mat-icon>
+</a>
