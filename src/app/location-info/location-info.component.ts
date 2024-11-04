@@ -27,7 +27,7 @@ const LOCATION_CHANGES_FORM_URL =
   styleUrl: './location-info.component.scss',
 })
 export class LocationInfoComponent {
-  location = input<ISGRLocation>();
+  location = input.required<ISGRLocation>();
 
   googleMapsUrl = computed(() => {
     if (!this.location()?.lat || !this.location()?.lng) {
