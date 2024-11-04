@@ -45,32 +45,14 @@ export class LocationReviewsComponent implements OnDestroy {
 
   constructor() {
     effect(() => {
-      this.isLoading = true;
-      this.locationScore = 0;
-      this.starCounts = DEFAULT_STAR_COUNTS;
-
-      this._subscription$ = from(
-        this._locations.getLocationReviews(this.locationId()),
-      ).subscribe({
-        next: (value) => {
-          this.reviews = value;
-
-          if (value.length) {
-            this._calculateLocationRating();
-          }
-        },
-        error: (err) => {
-          console.error(err);
-        },
-        complete: () => {
-          this.isLoading = false;
-        },
-      });
+      if (this.locationId()) {
+        this._retrieveLocationReviews();
+      }
     });
   }
 
   ngOnDestroy(): void {
-    this._subscription$.unsubscribe();
+    this._subscription$?.unsubscribe();
   }
 
   openNewReviewDialog() {
@@ -109,5 +91,29 @@ export class LocationReviewsComponent implements OnDestroy {
         (count / this.reviews.length) * 100,
       ])
       .sort((a, b) => b[0] - a[0]);
+  }
+
+  private _retrieveLocationReviews() {
+    this.isLoading = true;
+    this.locationScore = 0;
+    this.starCounts = DEFAULT_STAR_COUNTS;
+
+    this._subscription$ = from(
+      this._locations.getLocationReviews(this.locationId()),
+    ).subscribe({
+      next: (value) => {
+        this.reviews = value;
+
+        if (value.length) {
+          this._calculateLocationRating();
+        }
+      },
+      error: (err) => {
+        console.error(err);
+      },
+      complete: () => {
+        this.isLoading = false;
+      },
+    });
   }
 }

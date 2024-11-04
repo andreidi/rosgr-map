@@ -24,24 +24,30 @@ export class LocationScheduleComponent implements OnDestroy {
 
   constructor() {
     effect(() => {
-      this.isLoading = true;
-      this._subscription$ = from(
-        this._locations.getLocationSchedule(this.locationId()),
-      ).subscribe({
-        next: (value) => {
-          this.schedules = value;
-        },
-        error: (err) => {
-          console.error(err);
-        },
-        complete: () => {
-          this.isLoading = false;
-        },
-      });
+      if (this.locationId()) {
+        this._retrieveLocationSchedule();
+      }
     });
   }
 
   ngOnDestroy(): void {
-    this._subscription$.unsubscribe();
+    this._subscription$?.unsubscribe();
+  }
+
+  private _retrieveLocationSchedule() {
+    this.isLoading = true;
+    this._subscription$ = from(
+      this._locations.getLocationSchedule(this.locationId()),
+    ).subscribe({
+      next: (value) => {
+        this.schedules = value;
+      },
+      error: (err) => {
+        console.error(err);
+      },
+      complete: () => {
+        this.isLoading = false;
+      },
+    });
   }
 }

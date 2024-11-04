@@ -1,7 +1,4 @@
-@let locationInfo = location();
-@let navigationUrl = googleMapsUrl();
-
-@if (locationInfo) {
+@if (location(); as locationInfo) {
   <section class="location-info__container">
     <div class="location-info__header">
       <h1 class="location-info__name">
@@ -27,7 +24,7 @@
   </section>
 
   <section class="location-info__container">
-    @if (navigationUrl) {
+    @if (googleMapsUrl(); as navigationUrl) {
       <a mat-stroked-button [href]="navigationUrl" target="_blank">
         <mat-icon>directions</mat-icon>
         Navighează la adresă
