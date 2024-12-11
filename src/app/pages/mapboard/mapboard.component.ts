@@ -9,7 +9,6 @@ import { LocationInfoComponent } from '@features/location-info/components/locati
 import { LoadingComponent } from '@shared/components/loading/loading.component';
 
 import { ISGRLocation } from '@shared/types/location';
-import { SuggestLocationFABComponent } from "../../features/suggest-location/components/suggest-location-fab/suggest-location-fab.component";
 
 @Component({
   selector: 'app-mapboard',
@@ -22,8 +21,7 @@ import { SuggestLocationFABComponent } from "../../features/suggest-location/com
     MapComponent,
     LocationInfoComponent,
     LoadingComponent,
-    SuggestLocationFABComponent
-],
+  ],
   templateUrl: './mapboard.component.html',
   styleUrl: './mapboard.component.scss',
 })
