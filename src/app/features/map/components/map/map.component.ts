@@ -19,11 +19,12 @@ import {
 } from '@shared/utils/constants';
 
 import { ISGRLocation } from '@shared/types/location';
+import { SuggestLocationFABComponent } from '@features/suggest-location/components/suggest-location-fab/suggest-location-fab.component';
 
 @Component({
   selector: 'app-map',
   standalone: true,
-  imports: [],
+  imports: [SuggestLocationFABComponent],
   templateUrl: './map.component.html',
   styleUrl: './map.component.scss',
 })
