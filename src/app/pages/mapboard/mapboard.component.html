@@ -1,0 +1,31 @@
+@defer {
+  <mat-drawer-container class="mapboard" hasBackdrop="false">
+    <mat-drawer #sidenav class="app__sidenav" mode="over">
+      <div class="mapboard__sidenav-options">
+        <button
+          mat-icon-button
+          aria-controls="sidenav"
+          aria-label="Închide panoul lateral"
+          matTooltip="Închide"
+          (click)="sidenav.close()"
+        >
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
+      <app-location-info [location]="selectedLocation" />
+    </mat-drawer>
+
+    <div class="mapboard__container">
+      <app-map
+        (locationSelected)="onLocationSelected($event)"
+        (closeSideNav)="sidenav.close()"
+      />
+    </div>
+  </mat-drawer-container>
+
+  <app-suggest-location-fab />
+} @loading (minimum 750ms) {
+  <app-loading />
+} @error {
+  <p>Failed to load the map</p>
+}
